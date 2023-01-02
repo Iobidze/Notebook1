@@ -13,10 +13,42 @@ class _ButtonPositionState extends State<ButtonPosition>{
     floatingActionButton: FloatingActionButton(
       onPressed: (){},
       tooltip: "Add task",
-      child: Icon(Co),
+      child: Icon(Icons.add),),
+    floatingActionButtonLocation: _buttonLocation,
+    body: Container(
+    child: Column(
+      children: [
+        RadioListTile(
+            title: const Text("Центр"),
+            value: FloatingActionButtonLocation.centerFloat,
+            groupValue: _buttonLocation,
+            onChanged: (FloatingActionButtonLocation? value){
+              setState(() {
+                _buttonLocation=value;
+              });
+            }),
+        RadioListTile(
+            title: const Text("Справо"),
+            value: FloatingActionButtonLocation.endFloat,
+            groupValue: _buttonLocation,
+            onChanged: (FloatingActionButtonLocation? value){
+              setState(() {
+                _buttonLocation=value;
+              });
+            }),
+        RadioListTile(
+            title: const Text("Слево"),
+            value: FloatingActionButtonLocation.startFloat,
+            groupValue: _buttonLocation,
+            onChanged: (FloatingActionButtonLocation? value){
+              setState(() {
+                _buttonLocation=value;
+              });
+            }),
+      ],
     ),
+    ) ,);
 
-  );
   }
 
 }
