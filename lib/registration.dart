@@ -1,7 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
 import 'notepad.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+Future<void> registration()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user != null){
+      print(user.uid);
+    }
+  });
+}
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
+}
 
 class Registration extends ConsumerWidget {
   @override
@@ -36,12 +62,12 @@ class Registration extends ConsumerWidget {
                 },
                 child: Text('Войти')),
             TextButton(
-                onPressed: () {
-                  //
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => MyHomePage()));
-                  //
-                },
+                onPressed: signInWithGoogle, //{
+                //   //
+                //   // Navigator.of(context).push(MaterialPageRoute(
+                //   //     builder: (BuildContext context) => MyHomePage()));
+                //   // //
+                // },
                 child: Text('Войти через Google')),
           ],
         ),
