@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'registration.dart';
 
 void main() {
   runApp(ProviderScope(child: Notebook()));
 }
-
-// final String a = '10';
 
 final ProvaiderName = Provider(
   (ref) {
@@ -13,15 +12,16 @@ final ProvaiderName = Provider(
   },
 );
 
-class Notebook extends ConsumerWidget {
+class Notebook extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final name = ref.watch(ProvaiderName);
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(name),
+          title: Text('Book+'),
+          centerTitle: true,
         ),
+        body: Registration(),
       ),
     );
   }
