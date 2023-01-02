@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'button.dart';
 import 'color.dart';
 class Settings extends StatelessWidget{
   const Settings({Key? key}) : super(key: key);
@@ -21,7 +22,14 @@ class Settings extends StatelessWidget{
                     //
                   },
                   child: Text('Смена цвета')),
-              Text("Смена полдожения кнопки")
+              TextButton(
+                  onPressed: () {
+                    //
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => ButtonPosition()));
+                    //
+                  },
+                  child: Text('Положение кнопки')),
             ],
           ),
         ),
