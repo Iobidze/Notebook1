@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notebook1/settings123.dart';
 import 'registration.dart';
 import 'note.dart';
 
@@ -17,6 +18,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions:  <Widget>[
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: IconButton(icon: Icon(Icons.settings),
+              onPressed:() {Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => Settings()));}),
+            ),
+          )
+        ],
         title: const Text('Book+'),
         centerTitle: true,
         backgroundColor: Colors.black54,
